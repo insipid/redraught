@@ -1,1 +1,70 @@
-<html><body><%= @session.id %></body></html>
+<div id="app"
+     data-session-id="<%= @session.id %>"
+     data-step-count="<%= @session.pipeline.steps.length %>">
+
+  <header id="topbar">
+    <div class="topbar-left">
+      <a href="/" class="home-link">Redraught</a>
+      <span class="session-name"><%= @session.name %></span>
+      <span class="pipeline-name"><%= @session.pipeline.name %></span>
+    </div>
+    <div class="topbar-right">
+      <span id="step-indicator"></span>
+      <button id="run-all-btn">Run All</button>
+    </div>
+  </header>
+
+  <div id="layout">
+    <nav id="sidebar">
+      <% @session.pipeline.steps.each_with_index do |step, i| %>
+        <div class="step-item" data-n="<%= i + 1 %>">
+          <span class="step-number"><%= i + 1 %></span>
+          <span class="step-name"><%= step.name %></span>
+          <span class="step-badge status-<%= @session.step_status(i + 1) %>"
+                data-status-n="<%= i + 1 %>">
+            <%= @session.step_status(i + 1) %>
+          </span>
+        </div>
+      <% end %>
+    </nav>
+
+    <main id="main-panel">
+      <details id="prompt-strip">
+        <summary>Prompt &amp; Command</summary>
+        <div class="prompt-inner">
+          <label>Prompt<textarea id="prompt-editor" rows="4"></textarea></label>
+          <label>Command<input type="text" id="command-editor"></label>
+          <div class="prompt-actions">
+            <small>Edits are ephemeral (one run only) unless saved.</small>
+          </div>
+        </div>
+      </details>
+
+      <div id="panels">
+        <div class="panel" id="input-panel">
+          <h3>Input</h3>
+          <pre id="input-content"></pre>
+        </div>
+        <div class="panel" id="output-panel">
+          <div class="panel-header">
+            <h3>Output</h3>
+            <div class="panel-actions">
+              <button id="run-step-btn">Run Step</button>
+              <button id="save-output-btn">Save</button>
+            </div>
+          </div>
+          <textarea id="output-editor"></textarea>
+        </div>
+      </div>
+
+      <details id="diff-section" open>
+        <summary>Diff</summary>
+        <div id="diff-content"></div>
+      </details>
+
+      <div id="status-bar">
+        <pre id="stderr-output"></pre>
+      </div>
+    </main>
+  </div>
+</div>
