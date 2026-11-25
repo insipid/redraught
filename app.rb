@@ -65,7 +65,8 @@ get '/sessions/:id/steps/:n' do
     output:      session.step_content(n),
     status:      session.step_status(n),
     prompt:      step.prompt,
-    command:     Runner.resolve_command(step.command_template, step.prompt, input_path)
+    model:       step.model,
+    command:     Runner.resolve_command(step.command_template, step.prompt, input_path, model: step.model)
   }.to_json
 end
 

@@ -1,0 +1,29 @@
+name: Podcast Cleanup (OpenRouter)
+description: Clean up a verbatim transcript using an OpenRouter model
+output_extension: md
+
+# Requires: llm install llm-openrouter && llm keys set openrouter
+# Browse models at https://openrouter.ai/models
+model: openrouter/anthropic/claude-3-haiku
+
+steps:
+  - id: punctuation
+    name: Add Punctuation
+    prompt: |
+      Add appropriate punctuation to this verbatim transcript. Remove filler
+      words (um, uh, like) and false starts. Make minimal changes — do not
+      rephrase or restructure anything.
+
+  - id: paragraphs
+    name: Form Paragraphs
+    prompt: |
+      Group the sentences into coherent paragraphs based on topic shifts.
+      Do not change any wording.
+
+  - id: structure
+    name: Improve Structure
+    prompt: |
+      Improve the structure for readability. You may reorder sections but
+      keep all content present.
+    # Per-step model override example:
+    # model: openrouter/openai/gpt-4o

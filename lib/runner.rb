@@ -5,17 +5,18 @@ class Runner
     command = if command_override && !command_override.strip.empty?
       command_override
     else
-      resolve_command(step.command_template, step.prompt, input_path)
+      resolve_command(step.command_template, step.prompt, input_path, model: step.model)
     end
     execute(command, output_path)
   end
 
-  def self.resolve_command(template, prompt, input_path)
+  def self.resolve_command(template, prompt, input_path, model: nil)
     quoted_prompt = shell_quote(prompt.to_s)
     quoted_input  = shell_quote(input_path.to_s)
     template
       .gsub('{prompt}') { quoted_prompt }
       .gsub('{input}')  { quoted_input }
+      .gsub('{model}')  { model.to_s }
   end
 
   private
