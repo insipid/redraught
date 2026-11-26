@@ -40,27 +40,27 @@
         </div>
       </details>
 
+      <div id="action-bar">
+        <button id="run-step-btn">Run Step</button>
+        <button id="save-output-btn">Save</button>
+      </div>
+
       <div id="panels">
         <div class="panel" id="input-panel">
-          <h3>Input</h3>
+          <div class="panel-header">
+            <h3>Input</h3>
+            <button class="collapse-btn" id="collapse-input-btn" title="Collapse input">&#x25C4;</button>
+          </div>
           <pre id="input-content"></pre>
         </div>
         <div class="panel" id="output-panel">
           <div class="panel-header">
+            <button class="collapse-btn" id="collapse-output-btn" title="Collapse output">&#x25BA;</button>
             <h3>Output</h3>
-            <div class="panel-actions">
-              <button id="run-step-btn">Run Step</button>
-              <button id="save-output-btn">Save</button>
-            </div>
           </div>
           <textarea id="output-editor"></textarea>
         </div>
       </div>
-
-      <details id="diff-section" open>
-        <summary>Diff</summary>
-        <div id="diff-content"></div>
-      </details>
 
       <div id="status-bar">
         <pre id="stderr-output"></pre>
