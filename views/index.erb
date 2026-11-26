@@ -1,0 +1,42 @@
+<div class="page-index">
+  <h1>Redraught</h1>
+
+  <section class="new-session">
+    <h2>New Session</h2>
+    <form action="/sessions" method="post" enctype="multipart/form-data">
+      <label>
+        Session name (optional)
+        <input type="text" name="name" placeholder="my-podcast-ep42">
+      </label>
+      <label>
+        Pipeline
+        <select name="pipeline">
+          <% @pipelines.each do |p| %>
+            <option value="<%= p[:basename] %>"><%= p[:pipeline].name %></option>
+          <% end %>
+        </select>
+      </label>
+      <label>
+        Transcript file
+        <input type="file" name="transcript" accept=".txt,.md">
+      </label>
+      <p class="or-label">or paste transcript:</p>
+      <textarea name="transcript_text" rows="6" placeholder="Paste transcript here&hellip;"></textarea>
+      <button type="submit">Create Session</button>
+    </form>
+  </section>
+
+  <% if @sessions.any? %>
+    <section class="session-list">
+      <h2>Sessions</h2>
+      <ul>
+        <% @sessions.each do |s| %>
+          <li>
+            <a href="/sessions/<%= s.id %>"><%= s.id %></a>
+            &mdash; <%= s.pipeline.name %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
+</div>

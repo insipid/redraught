@@ -1,0 +1,26 @@
+name: Podcast Cleanup
+description: Clean up a verbatim transcript into a readable article
+output_extension: md
+
+steps:
+  - id: punctuation
+    name: Add Punctuation
+    description: Add punctuation, remove filler words and false starts
+    prompt: |
+      Add appropriate punctuation to this verbatim transcript. Remove filler
+      words (um, uh, like) and false starts. Make minimal changes — do not
+      rephrase or restructure anything.
+
+  - id: paragraphs
+    name: Form Paragraphs
+    description: Group sentences into coherent paragraphs
+    prompt: |
+      Group the sentences into coherent paragraphs based on topic shifts.
+      Do not change any wording.
+
+  - id: structure
+    name: Improve Structure
+    description: Reorder and restructure for readability
+    prompt: |
+      Improve the structure for readability. You may reorder sections but
+      keep all content present.
